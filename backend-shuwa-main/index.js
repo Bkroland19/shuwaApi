@@ -8,6 +8,7 @@ dotenv.config();
 import authRoutes from "./routes/authRoutes.js";
 import adminRoutes from "./routes/adminRoutes.js";
 import InitiateMongoServer from "./config/db.js";
+import adminRouter from "./routes/adminRoutes.js";
 InitiateMongoServer();
 
 const app = express();
@@ -16,7 +17,7 @@ app.use(express.urlencoded({ extended: true, limit: "30mb" }));
 app.use(cors());
 app.use(morgan("dev"));
 app.use("/api/v1/auth", authRoutes);
-app.use("/api/v1/ladies", adminRoutes);
+app.use("/api/v1", adminRoutes);
 
 app.get("/", (req, res) => {
 	res.json({ message: "API Working" });
