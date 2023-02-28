@@ -19,3 +19,23 @@ Content-Type: application/json
    "username":"test",
     "password":"test"
 }
+
+
+####upload
+POST http://localhost:4000/api/v1/upload
+Content-Type: application/json
+
+{
+    "name":"test",
+    "password":"test",
+    "age":12,
+    "location":"test",
+    "color":"red",
+    "status":"test",
+    "price":"50K",
+    "images":["https://res.cloudinary.com/itgenius/image/upload/v1677054417/yc7jwbuvxpst63ehj1bq.jpg"]
+}
+
+####get request
+
+GET http://localhost:4000/
