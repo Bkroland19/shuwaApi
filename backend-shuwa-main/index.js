@@ -19,23 +19,23 @@ app.use("/api/v1/auth", authRoutes);
 app.use("/api/v1/ladies", adminRoutes);
 
 app.get("/", (req, res) => {
-  res.json({ message: "API Working" });
+	res.json({ message: "API Working" });
 });
 
 app.use(async (req, res, next) => {
-  next(createErrors.NotFound("This route does not exist"));
+	next(createErrors.NotFound("This route does not exist"));
 });
 
 app.use((error, req, res, next) => {
-  res.status(error.status || 500);
-  res.json({
-    message: error,
-    status: error.status || 500,
-  });
+	res.status(error.status || 500);
+	res.json({
+		message: error,
+		status: error.status || 500,
+	});
 });
 
 const PORT = process.env.PORT || 4000;
-app.listen(PORT, () => {
-  console.log(`Server Started at PORT ${PORT}......`);
-  console.log(`http://localhost:${PORT}`);
+app.listen(PORT, "0.0.0.0", () => {
+	console.log(`Server Started at PORT ${PORT}......`);
+	console.log(`http://localhost:${PORT}`);
 });
