@@ -4,7 +4,6 @@ const userSchema = mongoose.Schema(
 	{
 		username: {
 			type: String,
-			required: true,
 			unique: true,
 		},
 		email: {
@@ -17,13 +16,33 @@ const userSchema = mongoose.Schema(
 			required: true,
 		},
 		password: { type: String },
-		admin: {
-			type: Boolean,
-			default: false,
-		},
 		isAdmin: {
 			type: Boolean,
 			default: false,
+		},
+		name: {
+			type: String,
+		},
+		age: {
+			type: Number,
+			default: 21,
+		},
+		location: {
+			type: String,
+		},
+		color: {
+			type: String,
+			enum: ["Brown", "Chocolate", "DarkSkin", "Dark"],
+			default: "Dark",
+		},
+		price: {
+			type: Number,
+			default: 0,
+		},
+		status: {
+			type: String,
+			enum: ["Available", "Unavailable"],
+			default: "Unavailable",
 		},
 		images: {
 			type: Array,

@@ -69,7 +69,7 @@ router.post("/create-user", verifyAccessToken, async (req, res) => {
 	try {
 		const uploader = await User.findById(req.user._id);
 
-		const { username, email, mobile, password } = req.body;
+		const { username, email, mobile, location , age , color , status} = req.body;
 
 		if (!uploader.isAdmin) {
 			return res.status(403).json({ error: "FORBIDDEN" });
@@ -79,7 +79,10 @@ router.post("/create-user", verifyAccessToken, async (req, res) => {
 			username,
 			email,
 			mobile,
-			password,
+			age,
+			location,
+			status,
+			color
 		});
 
 		await user.save();
@@ -87,7 +90,7 @@ router.post("/create-user", verifyAccessToken, async (req, res) => {
 		res.json({ success: true, user });
 	} catch (err) {
 		console.error(err);
-		res.status(500).json({ error: "Server Error" });
+		res.status(500).json({ error: "Server Error when creating user" });
 	}
 });
 
@@ -109,5 +112,35 @@ router.get("/created-user", verifyAccessToken, async (req, res) => {
 		res.status(500).json({ error: "Server Error" });
 	}
 });
+
+
+router.patch("/patch/:id", verifyAccessToken, async (req, res) => {
+	try {
+	  const uploader = await User.findById(req.user._id);
+	  const userToUpdate = await User.findById(req.params.id);
+  
+	  if (!uploader.isAdmin && uploader.id !== userToUpdate.id) {
+		return res.status(401).json({ error: "FORBIDDEN" });
+	  }
+  
+	  const { username, email, mobile, location, age, color, status } = req.body;
+  
+	  userToUpdate.username = username || userToUpdate.username;
+	  userToUpdate.email = email || userToUpdate.email;
+	  userToUpdate.mobile = mobile || userToUpdate.mobile;
+	  userToUpdate.location = location || userToUpdate.location;
+	  userToUpdate.age = age || userToUpdate.age;
+	  userToUpdate.color = color || userToUpdate.color;
+	  userToUpdate.status = status || userToUpdate.status;
+  
+	  await userToUpdate.save();
+  
+	  res.json({ success: true, user: userToUpdate });
+	} catch (err) {
+	  console.error(err);
+	  res.status(500).json({ error: "Server Error when updating user" });
+	}
+  });
+  
 
 export default router;
