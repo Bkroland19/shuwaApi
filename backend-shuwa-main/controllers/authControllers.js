@@ -52,7 +52,7 @@ export const login = async (req, res, next) => {
 			throw createErrors.Unauthorized("Incorrect credentials");
 		if (user && matchedPassword) {
 			const accessToken = await signedAccessToken(user._id);
-			res.send({ accessToken, username: user.username });
+			res.send({ accessToken, username: user.username, _id: user._id });
 		}
 	} catch (error) {
 		if (error.isJoi === true) error.status = 422;

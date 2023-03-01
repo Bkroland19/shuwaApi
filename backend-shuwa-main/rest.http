@@ -24,18 +24,21 @@ Content-Type: application/json
 ####upload
 POST http://localhost:4000/api/v1/upload
 Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2M2ZkNjllMDkwMjdiNmRjNmJlODc1ZGMiLCJhZG1pbiI6dHJ1ZSwiaWF0IjoxNjc3NTkxMzgzLCJleHAiOjE2Nzc2Nzc3ODMsImF1ZCI6WyI2M2ZkNjllMDkwMjdiNmRjNmJlODc1ZGMiLG51bGxdfQ.E9CsZ72-Bpnx2uzIvNIDO-NiglkMDeHNgZ0qoJ9ZUiQ
+
+
+
+####create-user
+POST http://localhost:4000/api/v1/create-user
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2M2ZkNjllMDkwMjdiNmRjNmJlODc1ZGMiLCJhZG1pbiI6dHJ1ZSwiaWF0IjoxNjc3NTkxMzgzLCJleHAiOjE2Nzc2Nzc3ODMsImF1ZCI6WyI2M2ZkNjllMDkwMjdiNmRjNmJlODc1ZGMiLG51bGxdfQ.E9CsZ72-Bpnx2uzIvNIDO-NiglkMDeHNgZ0qoJ9ZUiQ
 
 {
-    "name":"test",
-    "password":"test",
-    "age":12,
-    "location":"test",
-    "color":"red",
-    "status":"test",
-    "price":"50K",
-    "images":["https://res.cloudinary.com/itgenius/image/upload/v1677054417/yc7jwbuvxpst63ehj1bq.jpg"]
+   "username":"maria14",
+	"email":"maria14@gmail.com",
+	"mobile":"12344655",
+	"password":"password"
 }
-
 ####get request
 
 GET http://localhost:4000/

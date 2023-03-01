@@ -21,67 +21,74 @@ import cloudinary from "cloudinary";
 import { CloudinaryStorage } from "multer-storage-cloudinary";
 import multer from "multer";
 import { User } from "../models/userModel.js";
+import { verifyAccessToken } from "../helpers/jsonwebtoken.js";
 
-// const adminRouter = express.Router();
-
-//setup cloudinary
 cloudinary.config({
 	cloud_name: "itgenius",
-	api_key: process.env.CLOUDINARY_API_KEY,
-	api_secret: process.env.CLOUDINARY_API_SECRET,
+	api_key: "299184699938272",
+	api_secret: "Yap8Xf03EOi_p23q6SEYrsgi1jc",
 });
 
-//configure multer storage
-
 const storage = new CloudinaryStorage({
-	cloudinary: cloudinary,
+	cloudinary: cloudinary.v2,
 	params: {
 		folder: "shuwa",
-		allowed_formats: ["jpg", "jpeg", "png"],
+		format: async (req, file) => "png",
 		public_id: (req, file) => `${Date.now()}_${file.originalname}`,
 	},
 });
 
 const upload = multer({ storage: storage });
 
-//upload image route
-router.post("/upload",  upload.single("image"), async (req, res) => {
-  try {
-    // Check if user is an admin
-    const user = await User.findById(req.user.id);
-    if (!user.isAdmin) {
-      return res.status(401).json({ error: "Unauthorized" });
-    }
+router.post(
+	"/upload/:id",
+	verifyAccessToken,
+	upload.single("image"),
+	async (req, res) => {
+		try {
+			const uploader = await User.findById(req.user._id);
 
-    // Get the Cloudinary URL
-    const url = req.file.path;
+			if (!uploader.isAdmin) {
+				return res.status(401).json({ error: "FORBIDDEN" });
+			}
+			const user = await User.findById(req.params.id);
 
-    // Extract additional fields from the request body
-    const { name, age, location, color, availability, price } = req.body;
+			user.images = [...user.images, req.file.path];
 
-    // Create a new user object with the extracted fields
-    const newUser = new User({
-      email: req.user.email,
-      password: req.user.password,
-      name: name,
-      age: age,
-      location: location,
-      color: color,
-      status: availability,
-      price: price,
-      isAdmin: req.user.isAdmin,
-      images: [url],
-    });
+			await user.save();
 
-    // Save the new user document to the database
-    await newUser.save();
+			res.json({ success: true, images: user.images });
+		} catch (err) {
+			console.error(err);
+			res.status(500).json({ error: "Server Error" });
+		}
+	}
+);
 
-    res.json({ success: true });
-  } catch (err) {
-    console.error(err);
-    res.status(500).json({ error: "Server Error" });
-  }
+router.post("/create-user", verifyAccessToken, async (req, res) => {
+	try {
+		const uploader = await User.findById(req.user._id);
+
+		const { username, email, mobile, password } = req.body;
+
+		if (!uploader.isAdmin) {
+			return res.status(403).json({ error: "FORBIDDEN" });
+		}
+
+		const user = await User.create({
+			username,
+			email,
+			mobile,
+			password,
+		});
+
+		await user.save();
+
+		res.json({ success: true, user });
+	} catch (err) {
+		console.error(err);
+		res.status(500).json({ error: "Server Error" });
+	}
 });
-
 
 export default router;
