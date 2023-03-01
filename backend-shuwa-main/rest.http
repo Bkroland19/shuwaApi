@@ -24,21 +24,24 @@ Content-Type: application/json
 ####upload
 POST http://localhost:4000/api/v1/upload
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2M2ZkNjllMDkwMjdiNmRjNmJlODc1ZGMiLCJhZG1pbiI6dHJ1ZSwiaWF0IjoxNjc3NTkxMzgzLCJleHAiOjE2Nzc2Nzc3ODMsImF1ZCI6WyI2M2ZkNjllMDkwMjdiNmRjNmJlODc1ZGMiLG51bGxdfQ.E9CsZ72-Bpnx2uzIvNIDO-NiglkMDeHNgZ0qoJ9ZUiQ
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2M2ZkNjllMDkwMjdiNmRjNmJlODc1ZGMiLCJhZG1pbiI6dHJ1ZSwiaWF0IjoxNjc3NjM5MTE3LCJleHAiOjE2Nzc3MjU1MTcsImF1ZCI6WyI2M2ZkNjllMDkwMjdiNmRjNmJlODc1ZGMiLG51bGxdfQ.IRX7V-Tp7zwu8iMnWiRUpoUbgclSWc2vUmNAj26Gjik
 
 
 
 ####create-user
 POST http://localhost:4000/api/v1/create-user
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2M2ZkNjllMDkwMjdiNmRjNmJlODc1ZGMiLCJhZG1pbiI6dHJ1ZSwiaWF0IjoxNjc3NTkxMzgzLCJleHAiOjE2Nzc2Nzc3ODMsImF1ZCI6WyI2M2ZkNjllMDkwMjdiNmRjNmJlODc1ZGMiLG51bGxdfQ.E9CsZ72-Bpnx2uzIvNIDO-NiglkMDeHNgZ0qoJ9ZUiQ
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2M2ZkNjllMDkwMjdiNmRjNmJlODc1ZGMiLCJhZG1pbiI6dHJ1ZSwiaWF0IjoxNjc3NjM5MTE3LCJleHAiOjE2Nzc3MjU1MTcsImF1ZCI6WyI2M2ZkNjllMDkwMjdiNmRjNmJlODc1ZGMiLG51bGxdfQ.IRX7V-Tp7zwu8iMnWiRUpoUbgclSWc2vUmNAj26Gjik
 
 {
-   "username":"maria14",
-	"email":"maria14@gmail.com",
+   "username":"maria144",
+	"email":"maria144@gmail.com",
 	"mobile":"12344655",
 	"password":"password"
 }
 ####get request
 
-GET http://localhost:4000/
+GET http://localhost:4000/api/v1/created-user
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2M2ZkNjllMDkwMjdiNmRjNmJlODc1ZGMiLCJhZG1pbiI6dHJ1ZSwiaWF0IjoxNjc3NjM5MTE3LCJleHAiOjE2Nzc3MjU1MTcsImF1ZCI6WyI2M2ZkNjllMDkwMjdiNmRjNmJlODc1ZGMiLG51bGxdfQ.IRX7V-Tp7zwu8iMnWiRUpoUbgclSWc2vUmNAj26Gjik
+

@@ -91,4 +91,23 @@ router.post("/create-user", verifyAccessToken, async (req, res) => {
 	}
 });
 
+
+
+router.get("/created-user", verifyAccessToken, async (req, res) => {
+	try {
+		const uploader = await User.findById(req.user._id);
+
+		if (!uploader.isAdmin) {
+			return res.status(403).json({ error: "FORBIDDEN" });
+		}
+
+		const users = await User.find();
+
+		res.json({ success: true, users });
+	} catch (err) {
+		console.error(err);
+		res.status(500).json({ error: "Server Error" });
+	}
+});
+
 export default router;
